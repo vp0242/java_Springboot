@@ -80,6 +80,7 @@ public class FileOperation {
                 + record.totalTrades + " " + record.isin);
     }
 
+    //getting information about input symboll
     void getParticularSymbol() {
         if (isDatalistEmpty()) {
             return;
@@ -99,6 +100,7 @@ public class FileOperation {
         }
     }
 
+    //getting count of series
     void getCountSeries() {
         if (isDatalistEmpty()) {
             return;
@@ -120,6 +122,7 @@ public class FileOperation {
         }
     }
 
+    //getting symbol with particular gain input
     void getSymbolWithParticularGain() {
         if (isDatalistEmpty()) {
             return;
@@ -142,6 +145,8 @@ public class FileOperation {
 
     }
 
+    
+    //getting symbol with particular Topbot input
     void getSymbolWithParticularTopBot() {
         if (isDatalistEmpty()) {
             return;
@@ -165,6 +170,7 @@ public class FileOperation {
         }
     }
 
+    //getting standard deviation for given series
     void getStandardDeviation() {
         if (isDatalistEmpty()) {
             return;
@@ -187,9 +193,10 @@ public class FileOperation {
         for (Double price : prices) {
             sum = sum + Math.pow(price - mean, 2);
         }
-        System.out.println("Standard deviation for all symbols of a given series: " + Math.sqrt(sum / prices.size()));
+        System.out.printf("Standard deviation for all symbols of %s is %.4f ",series,Math.sqrt(sum / prices.size()));
 
     }
+
 
     Double getMean(List<Double> prices) {
         Double sum = 0d;
@@ -199,6 +206,7 @@ public class FileOperation {
         return sum / prices.size();
     }
 
+    //top records symbol with highest gain 
     void getTopNGainersForGivenSymbol() {
         if (isDatalistEmpty()) {
             return;
@@ -234,6 +242,7 @@ public class FileOperation {
         return gainList;
     }
 
+    //top records symbol with lowest gain 
     void getTopNLosersForGivenSymbol() {
         if (isDatalistEmpty()) {
             return;
@@ -259,7 +268,8 @@ public class FileOperation {
         }
 
     }
-
+   
+    //top records symbol with highest trade 
     void getTopTradedByVolumeSymbol() {
         if (isDatalistEmpty()) {
             return;
@@ -295,6 +305,7 @@ public class FileOperation {
 
     }
 
+    //top records symbol with lowest trade 
     void getLeastTradedByVolumeSymbol() {
         if (isDatalistEmpty()) {
             return;
@@ -329,6 +340,7 @@ public class FileOperation {
 
     }
 
+    //record symbol with highest and lowest trade for given series 
     void getHighestAndLowestTradedForSeries() {
         if (isDatalistEmpty()) {
             return;
@@ -348,10 +360,23 @@ public class FileOperation {
             System.out.println("No trades found for given series");
             return;
         }
-        trades.sort(Comparator.comparingDouble(sg -> sg.totalTradedVal));
+
+        Gain highesttrade = trades.get(0);
+        Gain lowesttrade = trades.get(0);
+
+        for (Gain trade : trades) {
+            if (trade.totalTradedVal > highesttrade.totalTradedVal) {
+                  highesttrade=trade;
+            }
+            if (trade.totalTradedVal < lowesttrade.totalTradedVal) {
+                lowesttrade=trade;
+          }
+
+        }
+
         System.out.printf("Highest and lowest traded for given series '%s' are: %s and %s\n",
-                series, trades.get(trades.size() - 1).symbol,
-                trades.get(0).symbol);
+                series, highesttrade.symbol,
+               lowesttrade.symbol);
 
     }
 

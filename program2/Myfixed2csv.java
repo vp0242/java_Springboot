@@ -14,7 +14,7 @@ public class Myfixed2csv {
                     "No arguments entered yet!!\nUsage: myfixed2csv <fixed-width-file> <n-columns> <length1> <length2> …");
             return;
         }
-
+        //taking user inputs
         String filename = args[0];
         String noColumnsStr = args[1];
         try {
@@ -40,6 +40,7 @@ public class Myfixed2csv {
 
     }
 
+    //reading file line by line 
     public static void readFile(String filename, int col, int[] collen) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -47,7 +48,7 @@ public class Myfixed2csv {
             while ((line = reader.readLine()) != null) {
                 SqrootCalculation sq = new SqrootCalculation(line, col, collen);
                 String newline = sq.getOperatedLine();
-                String newCsvFilePath = "/home/vishwap/Rebirth/java_assessment/program2/myfixed2csv.csv";
+                String newCsvFilePath = "/home/vishwap/Desktop/java_Springboot/program2/employees.txt";
                 writeIntoFile(newline, newCsvFilePath);
             }
             reader.close();
@@ -56,6 +57,7 @@ public class Myfixed2csv {
         }
     }
 
+    //writing into new csv file
     public static void writeIntoFile(String line, String filepath) {
         try {
             Path path = Paths.get(filepath);
@@ -79,6 +81,7 @@ class SqrootCalculation {
         this.columnLengths = collen;
     }
 
+    //slicing line string into column lengths
     public String getOperatedLine() {
         int startLength = 0;
         int index = 0;
@@ -95,6 +98,7 @@ class SqrootCalculation {
         return line;
     }
 
+    //removing spaces and zeroes from words
     public String[] removeSpacesAndZeroes(String[] sb) {
         String[] str = new String[columns];
         for (int index = 0; index < sb.length; index++) {
@@ -118,6 +122,7 @@ class SqrootCalculation {
 
     }
 
+    //appending commas and double quotes
     public String getNewLinesWithCommas(String[] sb) {
         StringBuilder str = new StringBuilder();
         for (int index = 0; index < sb.length; index++) {

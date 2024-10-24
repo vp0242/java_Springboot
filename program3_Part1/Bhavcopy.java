@@ -9,6 +9,7 @@ public class Bhavcopy {
     public static void main(String[] args) {
         Bhavcopy bh = new Bhavcopy();
 
+        //getting choice from user
         while (true) {
             int choice = bh.getChoice();
             if (choice == 11) {
@@ -17,13 +18,15 @@ public class Bhavcopy {
             }
             if (choice == -1) {
                 continue;
-            }
 
+            }
+            // perforing file operations on csv
             FileOperation file = new FileOperation(choice);
             file.startFileOperation();
         }
     }
 
+    // displaying choice for user
     int getChoice() {
         while (true) {
 

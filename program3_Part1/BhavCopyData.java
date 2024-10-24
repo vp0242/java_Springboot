@@ -23,6 +23,7 @@ public class BhavCopyData {
     BhavCopyData() {
     }
 
+    //adding data to object
     BhavCopyData(String symbol, String series, Double open, Double high, Double low, Double close, Double last,
             Double prevClose, Long totalTradedQty, Double totalTradedVal, String timestamp, Integer totalTrades,
             String isin) {
@@ -41,8 +42,9 @@ public class BhavCopyData {
         this.isin = isin;
     }
 
+    //loading Data Into data structure/memory
     public List<BhavCopyData> storeDataIntoMemory() {
-        String Filepath = "/home/vishwap/Rebirth/java_assessment/program3_Part1/20241007_NSE.csv";
+        String Filepath = "/home/vishwap/Desktop/java_Springboot/program3_Part1/bhavcopy.csv";
         List<BhavCopyData> datalist = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Filepath));
